@@ -24,7 +24,7 @@ spec:
       activeService: web-active
       previewService: web-preview
       autoPromotionEnabled: false
-      ##
+      ####
 
 ---
 apiVersion: v1
