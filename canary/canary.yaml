@@ -24,11 +24,11 @@ spec:
       maxUnavailable: 0
       steps:
       - setWeight: 10
-      - pause: { duration: 30 }  
+      - pause: { duration: 7d }  
       - setWeight: 30
-      - pause: { duration: 30 }
+      - pause: { duration: 7d }
       - setWeight: 50
-      - pause: { duration: 30 }
+      - pause: { duration: 7d }
       - setWeight: 80
       - pause: { duration: 30 } 
       
