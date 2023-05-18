@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: web-bluegreen
+spec:
+  replicas: 4
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: web-bluegreen
+  template:
+    metadata:
+      labels:
+        app: web-bluegreen
+    spec:
+      containers:
+      - name: web
+        image: nginx
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+  strategy:
+    blueGreen: 
+      activeService: web-active
+      previewService: web-preview
+      autoPromotionEnabled: false
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web-bluegreen
+  name: web-active
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web-bluegreen
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web-bluegreen
+  name: web-preview
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web-bluegreen
+
+
+
+
+
+
